@@ -12,7 +12,7 @@ Microsoft XBox Kinect - attched via USB
 Processing library dependencies can be found at:
 http://www.processing.org/reference/libraries/
 
-SimpleOpenNI - used for kinect
+SimpleOpenNI - used for kinect.
 Peasycam - used for visual camera movement.
 Minim - used to handle audio files.
 
