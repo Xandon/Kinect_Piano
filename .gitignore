@@ -6,3 +6,5 @@ Kinect_Stair_Piano1/localhostPianoBoxes.conf
 Kinect_Stair_Piano1/remotePianoBoxes.conf
 
 *.conf
+
+*.fmp12
