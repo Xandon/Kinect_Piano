@@ -6,17 +6,17 @@ import java.sql.*;
 import java.util.*;
 import java.io.*;
 
-/**
- *Conf Properties variables
- */
-Properties conf;
-public String url,dbName,driver,userName,password;
-
-
-/**
- * MySQL variables
- */             
-Connection conn = null;  
+///**
+// *Conf Properties variables
+// */
+//Properties conf;
+//public String url,dbName,driver,userName,password;
+//
+//
+///**
+// * MySQL variables
+// */             
+//Connection conn = null;  
 
 /**
  * ReadCVS file
@@ -54,25 +54,25 @@ float centerZStage = 0;
 void setup() {
   size(1024, 768, OPENGL);
   
-  // load MySQL configuration file
-  try {
-    conf=new Properties();
-    //conf.load(openStream(sketchPath("localhostWarp.conf")));
-    conf.load(openStream(sketchPath("localhostPianoBoxes.conf")));
-    url=conf.getProperty("url");
-    dbName=conf.getProperty("dbName");
-    driver=conf.getProperty("driver");
-    userName=conf.getProperty("userName");
-    password=conf.getProperty("password");
-    println(url); 
-  }   
-    catch (Exception e) {
-    die("Problem reading SquareBoxes.conf: "+e.toString());
-  } 
-  
-  
-  // Connect to MySQL
-  openConnectionToMySQL();
+//  // load MySQL configuration file
+//  try {
+//    conf=new Properties();
+//    //conf.load(openStream(sketchPath("localhostWarp.conf")));
+//    conf.load(openStream(sketchPath("localhostPianoBoxes.conf")));
+//    url=conf.getProperty("url");
+//    dbName=conf.getProperty("dbName");
+//    driver=conf.getProperty("driver");
+//    userName=conf.getProperty("userName");
+//    password=conf.getProperty("password");
+//    println(url); 
+//  }   
+//    catch (Exception e) {
+//    die("Problem reading SquareBoxes.conf: "+e.toString());
+//  } 
+//  
+//  
+//  // Connect to MySQL
+//  openConnectionToMySQL();
   
   // load ReadCVS
   cvsRead = new ReadCVS();
@@ -174,9 +174,9 @@ void keyPressed(){
     s = s - 0.01; 
   } else {
 		switch (key) {
-		case 'R':
-			readBumperFromMySQL();
-			break;
+//		case 'R':
+//			readBumperFromMySQL();
+//			break;
                 case 'C':
 			cvsRead.checkCVS();
 			break;
@@ -196,64 +196,64 @@ void mouseDragged() {
   rotateX += (mouseX - pmouseX) * 0.01;
   rotateY -= (mouseY - pmouseY) * 0.01;
 }
-
-/**
- * MySQL
- */
-void openConnectionToMySQL() {
-	try {
-		Class.forName(driver).newInstance();
-		conn = DriverManager.getConnection(url+dbName,userName,password);
-		System.out.println("Connected to the database");
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-}
-
-void closeConnectionToMySQL() {
-	try{
-		conn.close();
-		System.out.println("Disconnected from database");
-	}
-	catch (SQLException s){
-		s.printStackTrace();
-		System.out.println("SQL code does not execute.");
-	}
-}
-
-void readBumperFromMySQL() {          
-	try{
-		Statement st = conn.createStatement();
-		ResultSet res = st.executeQuery("SELECT * FROM  SquareBoxes");
-		System.out.println("SquareBoxes: " + "\t" + "CXS: " + "\t" + "CYS " + "\t" + "CZS: ");
-		while (res.next()) {
-
-			int bumperN = res.getInt("Bumper");
-			int bumperNcenterXStage = res.getInt("centerXStage");
-			int bumperNcenterYStage = res.getInt("centerYStage");
-			int bumperNcenterZStage = res.getInt("centerZStage");
-			int bumperNboxWidth = res.getInt("boxWidth");
-			int bumperNboxHeight = res.getInt("boxHeight");
-			int bumperNboxDepth = res.getInt("boxDepth");
-			int bumperNboxRotateX = res.getInt("boxRotateX");
-			int bumperNboxRotateY = res.getInt("boxRotateY");
-			int bumperNboxRotateZ = res.getInt("boxRotateZ");
-			System.out.println(bumperN + "\t" + bumperNcenterXStage + "\t" + bumperNcenterYStage + "\t" + bumperNcenterZStage + "\t" + 
-					bumperNboxWidth + "\t" + bumperNboxHeight + "\t" + bumperNboxDepth + "\t" + bumperNboxRotateX + "\t" + bumperNboxRotateY + "\t" + bumperNboxRotateZ);
-
-			if(bumperN < boxes){
-				squareBoxTrigger[bumperN].setSize(bumperNboxWidth, bumperNboxHeight, bumperNboxDepth);
-				squareBoxTrigger[bumperN].setCenter(bumperNcenterXStage, bumperNcenterYStage, bumperNcenterZStage);
-				squareBoxTrigger[bumperN].setRotateXYZVal(bumperNboxRotateX, bumperNboxRotateY, bumperNboxRotateZ);
-				System.out.println("LINE "+bumperN+" READ");
-			}
-		}
-		System.out.println("Read Ok");
-	}
-	catch (SQLException s)
-	{
-		s.printStackTrace();
-		System.out.println("SQL statement is not executed!");
-	}
-}
+//
+///**
+// * MySQL
+// */
+//void openConnectionToMySQL() {
+//	try {
+//		Class.forName(driver).newInstance();
+//		conn = DriverManager.getConnection(url+dbName,userName,password);
+//		System.out.println("Connected to the database");
+//	} catch (Exception e) {
+//		e.printStackTrace();
+//	}
+//}
+//
+//void closeConnectionToMySQL() {
+//	try{
+//		conn.close();
+//		System.out.println("Disconnected from database");
+//	}
+//	catch (SQLException s){
+//		s.printStackTrace();
+//		System.out.println("SQL code does not execute.");
+//	}
+//}
+//
+//void readBumperFromMySQL() {          
+//	try{
+//		Statement st = conn.createStatement();
+//		ResultSet res = st.executeQuery("SELECT * FROM  SquareBoxes");
+//		System.out.println("SquareBoxes: " + "\t" + "CXS: " + "\t" + "CYS " + "\t" + "CZS: ");
+//		while (res.next()) {
+//
+//			int bumperN = res.getInt("Bumper");
+//			int bumperNcenterXStage = res.getInt("centerXStage");
+//			int bumperNcenterYStage = res.getInt("centerYStage");
+//			int bumperNcenterZStage = res.getInt("centerZStage");
+//			int bumperNboxWidth = res.getInt("boxWidth");
+//			int bumperNboxHeight = res.getInt("boxHeight");
+//			int bumperNboxDepth = res.getInt("boxDepth");
+//			int bumperNboxRotateX = res.getInt("boxRotateX");
+//			int bumperNboxRotateY = res.getInt("boxRotateY");
+//			int bumperNboxRotateZ = res.getInt("boxRotateZ");
+//			System.out.println(bumperN + "\t" + bumperNcenterXStage + "\t" + bumperNcenterYStage + "\t" + bumperNcenterZStage + "\t" + 
+//					bumperNboxWidth + "\t" + bumperNboxHeight + "\t" + bumperNboxDepth + "\t" + bumperNboxRotateX + "\t" + bumperNboxRotateY + "\t" + bumperNboxRotateZ);
+//
+//			if(bumperN < boxes){
+//				squareBoxTrigger[bumperN].setSize(bumperNboxWidth, bumperNboxHeight, bumperNboxDepth);
+//				squareBoxTrigger[bumperN].setCenter(bumperNcenterXStage, bumperNcenterYStage, bumperNcenterZStage);
+//				squareBoxTrigger[bumperN].setRotateXYZVal(bumperNboxRotateX, bumperNboxRotateY, bumperNboxRotateZ);
+//				System.out.println("LINE "+bumperN+" READ");
+//			}
+//		}
+//		System.out.println("Read Ok");
+//	}
+//	catch (SQLException s)
+//	{
+//		s.printStackTrace();
+//		System.out.println("SQL statement is not executed!");
+//	}
+//}
 
