@@ -37,7 +37,7 @@ float s = 1;
 /**
  * Hotpoint Boxes
  */
-int boxes = 26; // one more then are needed so they start at 1 and run through
+int boxes = 51; // one more then are needed so they start at 1 and run through
 Hotpoint[] squareBoxTrigger = new Hotpoint[boxes];
 AudioSnippet[] squareBoxAudio = new AudioSnippet[boxes];
 
