@@ -120,7 +120,7 @@ void draw() {
   PVector[] depthPoints = kinect.depthMapRealWorld();
 
   
-  for(int i = 0; i < depthPoints.length; i++)
+  for(int i = 0; i < depthPoints.length; i+=3)
   {
     PVector currentPoint = depthPoints[i];
     
