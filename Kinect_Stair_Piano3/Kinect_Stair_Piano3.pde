@@ -37,7 +37,7 @@ float s = 1;
 /**
  * Hotpoint Boxes
  */
-int boxes = 51; // one more then are needed so they start at 1 and run through
+int boxes = 71; // one more then are needed so they start at 1 and run through
 Hotpoint[] squareBoxTrigger = new Hotpoint[boxes];
 AudioSnippet[] squareBoxAudio = new AudioSnippet[boxes];
 
@@ -89,8 +89,9 @@ void setup() {
   //initialise minim and player
   minim = new Minim(this);
   //String[] notesFileNames = {"1C.wav","2D.wav","3E.wav","4F.wav","5G.wav"};
-  String[] notesFileNames = {"5G.wav","4F.wav", "3E.wav","2D.wav", "1C.wav"};
-  
+  String[] notesFileNames = {"3E.wav","2D.wav", "1C.wav","7B.wav","6A.wav","G.wav","F.wav", "E.wav","D.wav", "C.wav"};
+//    String[] notesFileNames = {"5G.wav","4F.wav", "3E.wav","2D.wav", "1C.wav","7B.wav","6A.wav","G.wav","F.wav", "E.wav"};
+//  String[] notesFileNames = {"7B.wav","6A.wav","5G.wav","4F.wav", "3E.wav","2D.wav", "1C.wav","B.wav","A.wav","G.wav","F.wav", "E.wav","D.wav", "C.wav"};  
   // initilialize hotpoints with their origins and size
   for( int i=1, noteFiles=0; i<boxes; i++){
  	squareBoxTrigger[i] = new Hotpoint(centerXStage,centerYStage,centerZStage, boxWidth, boxHeight, boxDepth, boxRotateX, boxRotateY, boxRotateZ);
@@ -115,6 +116,7 @@ void draw() {
   PImage rgbImage = kinect.rgbImage();
   PImage depthImage = kinect.depthImage();
   rotateX(radians(180));
+  
   stroke(255);
 
   PVector[] depthPoints = kinect.depthMapRealWorld();
@@ -123,11 +125,11 @@ void draw() {
   for(int i = 0; i < depthPoints.length; i+=3)
   {
     PVector currentPoint = depthPoints[i];
-    
     // have each hotpoint check to see if it includes the current point
     for( int j=1; j<boxes; j++){
       squareBoxTrigger[j].check(currentPoint);
     }
+    
 
     //stroke(depthImage.pixels[i]);
     stroke(rgbImage.pixels[i]);
@@ -144,7 +146,6 @@ void draw() {
     squareBoxTrigger[i].draw();
     squareBoxTrigger[i].clear();   
   }
-  
   
 }
 
